@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TTT</title>
+</head>
+<body>
+	<H1 style="font-size : 70px; color: white">TIC TAC TOE by BHD</H1>
+
+	<div style="z-index: 1" id="gameboard">
+		
+		<div data-A1="GB2[0][0]" id="cell1" class="cell">
+	
+		</div>
+		<div data-B1="GB2[0][1]" id="cell2" class="cell">
+
+		</div>
+		<div data-C1="GB2[0][2]" id="cell3" class="cell">
+	
+		</div>		
+		<div data-A2="GB2[1][0]" id="cell4" class="cell">
+	
+		</div>		
+		<div data-B2="GB2[1][1]" id="cell5" class="cell">
+	
+		</div>
+		<div data-C2="GB2[1][2]" id="cell6" class="cell">
+	
+		</div>
+		<div data-A3="GB2[2][0]" id="cell7" class="cell">
+	
+		</div>
+		<div data-B3="GB2[2][1]" id="cell8" class="cell">
+	
+		</div>
+		<div data-C3="GB2[2][2]" id="cell9" class="cell">
+	
+		</div>
+										
+	</div>
+<script>
+let body = document.querySelector('body');
+body.style.backgroundImage = "url('https://p.apk4fun.com/6e/bd/4f/com.arcsys.tictactoe-featured.jpg')";
+body.style.backgroundSize = "cover";
+body.style.backgroundRepeat = "no-repeat";
+body.style.zIndex = "-1";
+let Gameboard = { 
+
+gameboard : [[], [], []]
+
+}
+
+// let playerFactory = (name) => { const name = prompt()
+//}
+ 
+
+let GB2 = Gameboard.gameboard;
+
+// in order to push X and O s into the array, use .push method through addEventListener Click on the corresponding div 
+let GB = document.querySelector('#gameboard');
+GB.style.display = "grid";
+GB.style.width = "960px";
+GB.style.height = "960px";
+GB.style.gridTemplateRows = "repeat(3, 1fr)";
+GB.style.gridTemplateColumns = "repeat(3, 1fr)";
+GB.style.border = "solid";
+GB.style.margin = "0 auto";
+
+
+
+
+let button1 = document.createElement('button');
+button1.textContent = "P1TURN";
+/*button1.addEventListener('click'), () => { if (button1.textContent == "P1 TURN") { button1.textContent = "P2TURN" }
+	else if (button1.textContent == "P2TURN") { button1.textContent = "P1TURN"}}*/
+body.appendChild(button1);
+
+let button2 = document.querySelector('button');
+
+
+
+let cello = document.querySelectorAll('#gameboard .cell');
+
+for (var i = 0; i < cello.length; i++) {
+	cello[i].style.textAlign = "center";
+	cello[i].style.color = "blue";
+	cello[i].style.border = "4px solid silver";
+	cello[i].style.fontSize = "200px";
+	cello[i].style.backgroundColor = "black";
+
+};
+
+// edit the style to fit whole box ==> textContent.width = 100%
+/*let cell1 = document.querySelector('#cell1');
+;
+
+let cell2 = document.querySelector('#cell2');
+
+
+let cell3 = document.querySelector('#cell3');
+
+
+let cell4 = document.querySelector('#cell4');
+
+
+let cell5 = document.querySelector('#cell5');
+
+
+let cell6 = document.querySelector('#cell6');
+
+
+let cell7 = document.querySelector('#cell7');
+
+
+let cell8 = document.querySelector('#cell8');
+
+
+let cell9 = document.querySelector('#cell9');*/
+
+
+
+
+let boolFlag0 = true;
+let boolFlag1 = true;
+let boolFlag2 = true;
+let boolFlag3 = true;
+let boolFlag4 = true;
+let boolFlag5 = true;
+let boolFlag6 = true;
+let boolFlag7 = true;
+let boolFlag8 = true;
+
+// Win functions that checks for 3 in a row and tie (to be implemented)
+function Win() { 
+
+	if (cell1.textContent == "X" && cell2.textContent == "X" && cell3.textContent == "X") { alert('P1 wins!')}
+else if (cell4.textContent == "X" && cell5.textContent == "X" && cell6.textContent == "X") { alert('P1 wins!')}
+else if (cell7.textContent == "X" && cell8.textContent == "X" && cell9.textContent == "X") { alert('P1 wins!')}
+else if (cell1.textContent == "X" && cell4.textContent == "X" && cell7.textContent == "X") { alert('P1 wins!')}
+else if (cell2.textContent == "X" && cell5.textContent == "X" && cell8.textContent == "X") { alert('P1 wins!')}
+else if (cell3.textContent == "X" && cell6.textContent == "X" && cell9.textContent == "X") { alert('P1 wins!')}
+else if (cell1.textContent == "X" && cell5.textContent == "X" && cell9.textContent == "X") { alert('P1 wins!')}
+else if (cell3.textContent == "X" && cell5.textContent == "X" && cell7.textContent == "X") { alert('P1 wins!')}
+else if (cell1.textContent == "O" && cell2.textContent == "O" && cell3.textContent == "O") { alert('P2 wins!')}
+else if (cell4.textContent == "O" && cell5.textContent == "O" && cell6.textContent == "O") { alert('P2 wins!')}
+else if (cell7.textContent == "O" && cell8.textContent == "O" && cell9.textContent == "O") { alert('P2 wins!')}
+else if (cell1.textContent == "O" && cell4.textContent == "O" && cell7.textContent == "O") { alert('P2 wins!')}
+else if (cell2.textContent == "O" && cell5.textContent == "O" && cell8.textContent == "O") { alert('P2 wins!')}
+else if (cell3.textContent == "O" && cell6.textContent == "O" && cell9.textContent == "O") { alert('P2 wins!')}
+else if (cell1.textContent == "O" && cell5.textContent == "O" && cell9.textContent == "O") { alert('P2 wins!')}
+else if (cell3.textContent == "O" && cell5.textContent == "O" && cell7.textContent == "O") { alert('P2 wins!')}
+else if (boolFlag0 === false && boolFlag1 === false && boolFlag2 === false && boolFlag3 === false && boolFlag4 === false && boolFlag5 === false && boolFlag6 === false && boolFlag7 === false && boolFlag8 === false) {alert ('Draw!')}
+
+	
+};
+
+// add if wrapper to condition X or O choice for P1 or P2
+// cellEventListeners with boolean flags to make it happen only once
+
+cell1.addEventListener('click', () => {if (button1.textContent == "P1TURN" && boolFlag0 === true) {cell1.textContent = "X"; button1.textContent = "P2TURN"; boolFlag0 = false; Win(); GB2[0][0] = "X"}
+	else if (button1.textContent == "P2TURN" && boolFlag0 === true) {cell1.textContent = "O"; button1.textContent = "P1TURN"; boolFlag0 = false; Win(); GB2[0][0] = "O"} } );
+
+cell2.addEventListener('click', () => {if (button1.textContent == "P1TURN" && boolFlag1 === true) {cell2.textContent = "X"; button1.textContent = "P2TURN"; boolFlag1 = false; Win(); GB2[0][1] = "X"}
+	else if (button1.textContent == "P2TURN" && boolFlag1 === true) {cell2.textContent = "O"; button1.textContent = "P1TURN"; boolFlag1 = false; Win(); GB2[0][1] = "O"} } );
+
+cell3.addEventListener('click', () => {if (button1.textContent == "P1TURN" && boolFlag2 === true) {cell3.textContent = "X"; button1.textContent = "P2TURN"; boolFlag2 = false; Win(); GB2[0][2] = "X"}
+	else if (button1.textContent == "P2TURN" && boolFlag2 === true) {cell3.textContent = "O"; button1.textContent = "P1TURN"; boolFlag2 = false; Win(); GB2[0][2] = "O"} } );
+
+cell4.addEventListener('click', () => {if (button1.textContent == "P1TURN" && boolFlag3 === true) {cell4.textContent = "X"; button1.textContent = "P2TURN"; boolFlag3 = false; Win(); GB2[1][0] = "X"}
+	else if (button1.textContent == "P2TURN" && boolFlag3 === true) {cell4.textContent = "O"; button1.textContent = "P1TURN"; boolFlag3 = false;; Win(); GB2[1][0] = "O"} } );
+
+cell5.addEventListener('click', () => {if (button1.textContent == "P1TURN" && boolFlag4 === true) {cell5.textContent = "X"; button1.textContent = "P2TURN"; boolFlag4 = false; Win(); GB2[1][1] = "X"}
+	else if (button1.textContent == "P2TURN" && boolFlag4 === true) {cell5.textContent = "O"; button1.textContent = "P1TURN"; boolFlag4 = false; Win(); GB2[1][1] = "O"} } );
+
+cell6.addEventListener('click', () => {if (button1.textContent == "P1TURN" && boolFlag5 === true) {cell6.textContent = "X"; button1.textContent = "P2TURN"; boolFlag5 = false; Win(); GB2[1][2] = "X"}
+	else if (button1.textContent == "P2TURN" && boolFlag5 === true) {cell6.textContent = "O"; button1.textContent = "P1TURN"; boolFlag5 = false; Win(); GB2[1][2] = "O"} } );
+
+cell7.addEventListener('click', () => {if (button1.textContent == "P1TURN" && boolFlag6 === true) {cell7.textContent = "X"; button1.textContent = "P2TURN"; boolFlag6 = false; Win(); GB2[2][0] = "X"}
+	else if (button1.textContent == "P2TURN" && boolFlag6 === true) {cell7.textContent = "O"; button1.textContent = "P1TURN"; boolFlag6 = false; Win(); GB2[2][0] = "O"} } );
+
+cell8.addEventListener('click', () => {if (button1.textContent == "P1TURN" && boolFlag7 === true) {cell8.textContent = "X"; button1.textContent = "P2TURN"; boolFlag7 = false; Win(); GB2[2][1] = "X"}
+	else if (button1.textContent == "P2TURN" && boolFlag7 === true) {cell8.textContent = "O"; button1.textContent = "P1TURN"; boolFlag7 = false; Win(); GB2[2][1] = "O"} } );
+
+cell9.addEventListener('click', () => {if (button1.textContent == "P1TURN" && boolFlag8 === true) {cell9.textContent = "X"; button1.textContent = "P2TURN"; boolFlag8 = false; Win(); GB2[2][2] = "X"}
+	else if (button1.textContent == "P2TURN" && boolFlag8 === true) {cell9.textContent = "O"; button1.textContent = "P1TURN"; boolFlag8 = false; Win(); GB2[2][2] = "O"} } );
+
+//Writte PATTERN RECOGNITION FROM ARRAY RESULT?
+
+let buttonReset = document.createElement('button');
+buttonReset.textContent = "RESET BOARD";
+buttonReset.addEventListener('click', () => this.window.location.reload());
+body.appendChild(buttonReset);
+
+/*cell1.addEventListener('click', (e) => {cell1.textContent = "X";
+if (cell2.textContent == "X") {cell1.textContent = "O"};
+if (cell4.textContent == "X") {cell1.textContent = "O"};
+if (cell5.textContent == "X") {cell1.textContent = "O"};
+
+
+
+
+
+
+});
+
+
+
+
+
+
+cell2.addEventListener('click', (e) => {cell2.textContent = "X";
+	if (cell1.textContent == "X") {cell2.textContent = "O"};
+	if (cell3.textContent == "X") {cell2.textContent = "O"};
+	if (cell4.textContent == "X") {cell2.textContent = "O"};
+	if (cell5.textContent == "X") {cell2.textContent = "O"};
+	if (cell6.textContent == "X") {cell2.textContent = "O"};
+	
+
+
+
+
+})
+cell3.addEventListener('click', (e) => {cell3.textContent = "X";
+	if (cell2.textContent == "X") {cell3.textContent = "O"};
+	if (cell5.textContent == "X") {cell3.textContent = "O"};
+	if (cell6.textContent == "X") {cell3.textContent = "O"};
+	
+
+
+})
+cell4.addEventListener('click', (e) => {cell4.textContent = "X";
+	if (cell1.textContent == "X") {cell4.textContent = "O"};
+	if (cell2.textContent == "X") {cell4.textContent = "O"};
+	if (cell4.textContent == "X") {cell4.textContent = "O"};
+	if (cell7.textContent == "X") {cell4.textContent = "O"};
+	if (cell8.textContent == "X") {cell4.textContent = "O"};
+	
+
+
+
+})
+cell5.addEventListener('click', (e) => {cell5.textContent = "X";
+	if (cell1.textContent == "X") {cell5.textContent = "O"};
+	if (cell2.textContent == "X") {cell5.textContent = "O"};
+	if (cell3.textContent == "X") {cell5.textContent = "O"};
+	if (cell4.textContent == "X") {cell5.textContent = "O"};
+	if (cell6.textContent == "X") {cell5.textContent = "O"};
+	if (cell7.textContent == "X") {cell5.textContent = "O"};
+	if (cell8.textContent == "X") {cell5.textContent = "O"};
+	if (cell9.textContent == "X") {cell5.textContent = "O"};
+	
+
+
+})
+cell6.addEventListener('click', (e) => {cell6.textContent = "X";
+	if (cell2.textContent == "X") {cell6.textContent = "O"};
+	if (cell3.textContent == "X") {cell6.textContent = "O"};
+	if (cell5.textContent == "X") {cell6.textContent = "O"};
+	if (cell8.textContent == "X") {cell6.textContent = "O"};
+	if (cell9.textContent == "X") {ccll6.textContent = "O"}
+
+
+})
+cell7.addEventListener('click', (e) => {cell7.textContent = "X";
+	if (cell4.textContent == "X") {cell7.textContent ="O"};
+	if (cell5.textContent == "X") {cell7.textContent = "O"};
+	if (cell8.textContent == "X") {cell7.textContent = "O"};
+
+	
+
+
+})
+cell8.addEventListener('click', (e) => {cell8.textContent = "X";
+	if (cell4.textContent == "X") {cell8.textContent = "O"};
+	if (cell5.textContent == "X") {cell8.textContent = "O"};
+	if (cell6.textContent == "X") {cell8.textContent = "O"};
+	if (cell7.textContent == "X") {cell8.textContent = "O"};
+	if (cell9.textContent == "X") {cell8.textContent = "O"};
+
+
+})
+cell9.addEventListener('click', (e) => {cell9.textContent = "X";
+	if (cell5.textContent == "X") {cell9.textContent = "O"};
+	if (cell6.textContent == "X") {cell9.textContent = "O"};
+	if (cell8.textContent == "X") {cell9.textContent = "O"};
+	
+
+
+
+
+
+
+
+
+
+})
+*/ 
+
+//for (var i = 0; i < cello.length; i++) { 
+//	cello[i].textContent = "X";
+//}
+
+
+/*function Renderarray() { for (var i = 0; i < cello.length; i++) {
+	for (var y = 1; y < GB2.length; y++) {
+		cello[i].textContent = GB2[y];
+	}
+}
+ }
+
+Renderarray();*/
+
+
+
+	// body...
+
+</script>
+</body>
+</html>
